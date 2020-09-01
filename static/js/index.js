@@ -6,7 +6,7 @@ var headingClass = 'heading';
 var cssFiles = ['ep_headings2/static/css/editor.css'];
 
 // All our tags are block elements, so we just return them.
-var tags = ['h1', 'h2', 'h3', 'h4', 'code'];
+var tags = ['h1','h2', 'h3', 'h4', 'h5', 'h6'];
 exports.aceRegisterBlockElements = function(){
   return tags;
 }
@@ -88,7 +88,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
     var tag = headingType[1];
 
     // backward compatibility, we used propose h5 and h6, but not anymore
-    if (tag == 'h5' || tag == 'h6') tag = 'h4';
+    //if (tag == 'h5' || tag == 'h6') tag = 'h4';
 
     if (_.indexOf(tags, tag) >= 0){
       var modifier = {
