@@ -39,7 +39,7 @@
     text-decoration: none;
     vertical-align: baseline;
     white-space: pre;
-    margin-bottom: .15em !important;
+    margin-bottom: .2em !important;
     margin-top: .5em !important;
 }
 #innerdocbody h4{
@@ -53,7 +53,7 @@
     text-decoration: none;
     vertical-align: baseline;
     white-space: pre;
-    margin-bottom: .15em !important;
+    margin-bottom: .2em !important;
     margin-top: .35em !important;
 }
 #innerdocbody h5{
@@ -67,7 +67,7 @@
     text-decoration: none;
     vertical-align: baseline;
     white-space: pre;
-    margin-bottom: .15em !important;
+    margin-bottom: .2em !important;
     margin-top: .5em !important;
 }
 #innerdocbody h6{
@@ -81,7 +81,7 @@
   text-decoration: none;
   vertical-align: baseline;
   white-space: pre;
-  margin-bottom: .15em !important;
+  margin-bottom: .2em !important;
   margin-top: .5em !important;
   margin-left: 0 !important;
 }
