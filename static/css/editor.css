@@ -1,14 +1,7 @@
 #innerdocbody h1{
   font-size: 72px;
   font-family: Arial;
-  color: #000000;
-  background-color: transparent;
-  font-weight: 700;
-  font-style: normal;
-  font-variant: normal;
-  text-decoration: none;
-  vertical-align: baseline;
-  white-space: pre;
+
   margin-bottom: .25em !important;
   margin-top: .4em !important;
 
@@ -16,14 +9,7 @@
 #innerdocbody h2{
   font-size: 64px;
     font-family: Arial;
-    color: #000000;
-    background-color: transparent;
-    font-weight: 700;
-    font-style: normal;
-    font-variant: normal;
-    text-decoration: none;
-    vertical-align: baseline;
-    white-space: pre;
+
     margin-bottom: .2em !important;
     margin-top: .35em !important;
   
@@ -31,56 +17,29 @@
 #innerdocbody h3{
   font-size: 48px;
     font-family: Arial;
-    color: #000000;
-    background-color: transparent;
-    font-weight: 700;
-    font-style: normal;
-    font-variant: normal;
-    text-decoration: none;
-    vertical-align: baseline;
-    white-space: pre;
+
     margin-bottom: .3em !important;
     margin-top: .7em !important;
 }
 #innerdocbody h4{
   font-size: 32px;
     font-family: Arial;
-    color: #000000;
-    background-color: transparent;
-    font-weight: 700;
-    font-style: normal;
-    font-variant: normal;
-    text-decoration: none;
-    vertical-align: baseline;
-    white-space: pre;
+
     margin-bottom: .2em !important;
     margin-top: .9em !important;
 }
 #innerdocbody h5{
     font-size: 24px;
     font-family: Arial;
-    color: #000000;
-    background-color: transparent;
-    font-weight: 700;
-    font-style: normal;
-    font-variant: normal;
-    text-decoration: none;
-    vertical-align: baseline;
-    white-space: pre;
+
     margin-bottom: .2em !important;
     margin-top: .7em !important;
 }
 #innerdocbody h6{
   font-size: 17.333333333333332px;
   font-family: Arial;
-  color: #000000;
-  background-color: transparent;
-  font-weight: 700;
-  font-style: normal;
-  font-variant: normal;
-  text-decoration: none;
-  vertical-align: baseline;
-  white-space: pre;
+
+  
   margin-bottom: .2em !important;
   margin-top: .7em !important;
   margin-left: 0 !important;
