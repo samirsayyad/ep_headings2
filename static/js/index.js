@@ -4,7 +4,7 @@ const _ = require('ep_etherpad-lite/static/js/underscore');
 const cssFiles = ['ep_headings2/static/css/editor.css'];
 
 // All our tags are block elements, so we just return them.
-const tags = ['h1', 'h2', 'h3', 'h4', 'code'];
+const tags = ['h1','h2', 'h3', 'h4', 'h5', 'h6'];
 exports.aceRegisterBlockElements = () => tags;
 
 // Bind the event handler to the toolbar buttons
