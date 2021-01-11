@@ -62,6 +62,8 @@ exports.aceEditEvent = (hookName, call) => {
       }
     });
   }, 250);
+
+  return {}
 };
 
 // Our heading attribute will result in a heaading:h1... :h6 class
