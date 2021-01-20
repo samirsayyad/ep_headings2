@@ -38,18 +38,8 @@
 #innerdocbody h6{
   font-size: 17.333333333333332px;
   font-family: Arial;
-
-  
   margin-bottom: .2em !important;
   margin-top: .7em !important;
   margin-left: 0 !important;
 }
 #innerdocbody code{font-family: RobotoMono;}
-#innerdocbody h1,
-#innerdocbody h2,
-#innerdocbody h3,
-#innerdocbody h4,
-#innerdocbody h5,
-#innerdocbody h6 {
-  display: inline-block;
-}
