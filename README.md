@@ -3,6 +3,8 @@
 
 An Etherpad Plugin to apply h1 etc. headings to a pad.
 
+> Note: This etherpad plugin is compatible with the [docs.plus](https://github.com/nwspk/docs.plus) version.
+
 ![Screenshot](screenshot.png)
 
 ## Features

@@ -1,5 +1,6 @@
 'use strict';
 
+const randomString = require('ep_etherpad-lite/static/js/pad_utils').randomString;
 const cssFiles = ['ep_headings2/static/css/editor.css'];
 
 // All our tags are block elements, so we just return them.
@@ -73,21 +74,28 @@ exports.aceAttribsToClasses = (hookName, context) => {
   if (context.key === 'heading') {
     return [`heading:${context.value}`];
   }
+  if (context.key === 'headerId') {
+    return [`headerId:${context.value}`];
+  }
 };
 
 // Here we convert the class heading:h1 into a tag
 exports.aceDomLineProcessLineAttributes = (hookName, context) => {
   const cls = context.cls;
   const headingType = /(?:^| )heading:([A-Za-z0-9]*)/.exec(cls);
+  let headerId = /(?:^| )headerId:([A-Za-z0-9]*)/.exec(cls);
   if (headingType) {
     let tag = headingType[1];
+    headerId = headerId ? headerId[1] : undefined;
 
     // backward compatibility, we used propose h5 and h6, but not anymore
     if (tag === 'h5' || tag === 'h6') tag = 'h4';
 
+    const headerAttr = headerId ? `data-id="${headerId}" class="heading ${headerId}"` : "";
+
     if (tags.indexOf(tag) >= 0) {
       const modifier = {
-        preHtml: `<${tag}>`,
+        preHtml: `<${tag} ${headerAttr}>`,
         postHtml: `</${tag}>`,
         processedMarker: true,
       };
@@ -111,8 +119,10 @@ exports.aceInitialized = (hookName, context) => {
     range(firstLine, lastLine).forEach((line) => {
       if (level >= 0) {
         documentAttributeManager.setAttributeOnLine(line, 'heading', tags[level]);
+        documentAttributeManager.setAttributeOnLine(line, 'headerId', randomString(16));
       } else {
         documentAttributeManager.removeAttributeOnLine(line, 'heading');
+        documentAttributeManager.removeAttributeOnLine(line, 'headerId');
       }
     });
   };
