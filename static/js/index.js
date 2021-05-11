@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('ep_etherpad-lite/static/js/underscore');
+const randomString = require('ep_etherpad-lite/static/js/pad_utils').randomString;
 const cssFiles = ['ep_headings2/static/css/editor.css'];
 
 // All our tags are block elements, so we just return them.
@@ -13,7 +13,7 @@ exports.postAceInit = (hookName, context) => {
   hs.on('change', function () {
     const value = $(this).val();
     const intValue = parseInt(value, 10);
-    if (!_.isNaN(intValue)) {
+    if (!isNaN(intValue)) {
       context.ace.callWithAce((ace) => {
         ace.ace_doInsertHeading(intValue);
       }, 'insertheading', true);
@@ -21,6 +21,11 @@ exports.postAceInit = (hookName, context) => {
     }
   });
 };
+
+const range = (start, end) => Array.from(
+    Array(Math.abs(end - start) + 1),
+    (_, i) => start + i
+);
 
 // On caret position change show the current heading
 exports.aceEditEvent = (hookName, call) => {
@@ -43,7 +48,7 @@ exports.aceEditEvent = (hookName, call) => {
     const lastLine = Math.max(firstLine, rep.selEnd[0] - ((rep.selEnd[1] === 0) ? 1 : 0));
     let totalNumberOfLines = 0;
 
-    _(_.range(firstLine, lastLine + 1)).each((line) => {
+    range(firstLine, lastLine).forEach((line) => {
       totalNumberOfLines++;
       const attr = attributeManager.getAttributeOnLine(line, 'heading');
       if (!activeAttributes[attr]) {
@@ -71,21 +76,28 @@ exports.aceAttribsToClasses = (hookName, context) => {
   if (context.key === 'heading') {
     return [`heading:${context.value}`];
   }
+  if (context.key === 'headerId') {
+    return [`headerId:${context.value}`];
+  }
 };
 
 // Here we convert the class heading:h1 into a tag
 exports.aceDomLineProcessLineAttributes = (hookName, context) => {
   const cls = context.cls;
   const headingType = /(?:^| )heading:([A-Za-z0-9]*)/.exec(cls);
+  let headerId = /(?:^| )headerId:([A-Za-z0-9]*)/.exec(cls);
   if (headingType) {
     let tag = headingType[1];
+    headerId = headerId ? headerId[1] : undefined;
 
     // backward compatibility, we used propose h5 and h6, but not anymore
     //if (tag == 'h5' || tag == 'h6') tag = 'h4';
 
-    if (_.indexOf(tags, tag) >= 0) {
+    const headerAttr = headerId ? `data-id="${headerId}" class="heading ${headerId}"` : "";
+
+    if (tags.indexOf(tag) >= 0) {
       const modifier = {
-        preHtml: `<${tag}>`,
+        preHtml: `<${tag} ${headerAttr}>`,
         postHtml: `</${tag}>`,
         processedMarker: true,
       };
@@ -105,11 +117,14 @@ exports.aceInitialized = (hookName, context) => {
     if (level >= 0 && tags[level] === undefined) return;
     const firstLine = rep.selStart[0];
     const lastLine = Math.max(firstLine, rep.selEnd[0] - ((rep.selEnd[1] === 0) ? 1 : 0));
-    _(_.range(firstLine, lastLine + 1)).each((i) => {
+
+    range(firstLine, lastLine).forEach((line) => {
       if (level >= 0) {
-        documentAttributeManager.setAttributeOnLine(i, 'heading', tags[level]);
+        documentAttributeManager.setAttributeOnLine(line, 'heading', tags[level]);
+        documentAttributeManager.setAttributeOnLine(line, 'headerId', randomString(16));
       } else {
-        documentAttributeManager.removeAttributeOnLine(i, 'heading');
+        documentAttributeManager.removeAttributeOnLine(line, 'heading');
+        documentAttributeManager.removeAttributeOnLine(line, 'headerId');
       }
     });
   };
